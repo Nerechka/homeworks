@@ -42,7 +42,7 @@ function getAverageAge(arr) {
 
 
 /*Сгруппируйте пользователей по возрасту.*/
-/*без rate*/
+/*без rate, извращенно и вообще..*/
 function grouping(arr) {
     const group = {};
     arr.map(info => { group[info.age] = info.name })
