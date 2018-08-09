@@ -11,55 +11,44 @@ const users = [
 
 /*Сорировка
 Отсортируйте массив по возрасту пользователей от меньшего к большему.*/
-users.sort(a,b => { return a.age- b.age })
+users.sort((a,b) => a.age - b.age)
 
 
 /*Отображение
 Создайте массив, содержащий только имена пользователей.*/
-const names = users.map(info => { return info.name })
+const names = users.map(info => info.name)
 
 
 /*Фильтрация
 Создайте массив, содержащий только совершеннолетних пользователей.*/
-const eighteen = users.filter(info => {
-    if (info.age >= 18) { return info }
-})
+const adultUsers = users.filter(info => info.age >= 18)
 
 
 /*Свертка
 Найдите самого старшего.*/
-function getOlder(arr) {
-    const older = arr.reduce((older, current) => { return older > current.age ? older : current.age }, 0);
-    return older;
+function getOldest(arr) {
+    const oldest = arr.reduce((oldest, current) => { return oldest > current.age ? oldest : current.age }, 0);
+    return oldest;
 }
 
 
 /*Посчитайте средний возраст.*/
 function getAverageAge(arr) {
-    const sumAge = users.reduce((sum, current) => { return sum + current.age}, 0);
-    return sumAge / users.length;
+    return users.reduce((sum, current) => { return sum + current.age}, 0) / users.length;
 }
 
 
 /*Сгруппируйте пользователей по возрасту.*/
-/*без rate, извращенно и вообще..*/
 function grouping(arr) {
-    const group = {};
-    arr.map(info => { group[info.age] = info.name })
-    if (group.length === arr.length) {
-        return group;
+    const usersByAge = arr.reduce((acc,current) => {
+       if (!acc[current['age']]) {
+        acc[current['age']] = []
     }
-    for (key in group) {
-        arr.forEach(info => {
-            const list = group[key].split(' ');
-            if ((list.some(item => { return item !== info.name && key == info.age}))) {
-                list.push(info.name)
-                const set = new Set(list)
-                group[key] = Array.from(set).join(' ');
-            };
-        })
-    }
-    return group
-};
+        acc[current['age']].push(current);
+        return acc;
+    }, {});
+console.log(usersByAge)
+}
 
 grouping(users);
+
