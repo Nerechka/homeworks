@@ -27,28 +27,53 @@ const adultUsers = users.filter(info => info.age >= 18)
 /*Свертка
 Найдите самого старшего.*/
 function getOldest(arr) {
-    const oldest = arr.reduce((oldest, current) => { return oldest > current.age ? oldest : current.age }, 0);
+    const oldest = arr.reduce((oldest, current) => oldest > current.age ? oldest : current.age, 0);
     return oldest;
 }
 
 
 /*Посчитайте средний возраст.*/
 function getAverageAge(arr) {
-    return users.reduce((sum, current) => { return sum + current.age}, 0) / users.length;
+    return users.reduce((sum, current) => sum + current.age, 0) / users.length;
 }
 
 
 /*Сгруппируйте пользователей по возрасту.*/
-function grouping(arr) {
-    const usersByAge = arr.reduce((acc,current) => {
-       if (!acc[current['age']]) {
+const usersByAge = users.reduce((acc, current) => {
+    if (!acc[current['age']]) {
         acc[current['age']] = []
     }
-        acc[current['age']].push(current);
-        return acc;
-    }, {});
+    acc[current['age']].push(current);
+    return acc;
+}, {});
+
 console.log(usersByAge)
+
+/*Задачи с рейтами
+Найдите средний рейт для каждого возраста.*/
+const averageRate = {};
+for (key in usersByAge ) {
+    averageRate[key] = usersByAge[key].map(info => info['rate'])
+                                      .reduce((sum, current) =>  sum + current, 0) / usersByAge[key].length;
 }
 
-grouping(users);
+console.log(averageRate)
+
+
+/*Найдите максимальный из всех средних рейтов по возрастам.*/
+let maxAverageRate = 0;
+    for (key in averageRate) {
+        maxAverageRate = Math.max(maxAverageRate, averageRate[key])
+}
+
+console.log(maxAverageRate)
+
+/*или*/
+
+let maxAverageRate = 0;
+for (let key in averageRate) {
+ maxAverageRate > averageRate[key]? maxAverageRate : maxAverageRate = averageRate[key];
+}
+
+console.log(maxAverageRate)
 
