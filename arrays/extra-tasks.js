@@ -62,8 +62,8 @@ console.log(averageRate)
 
 /*Найдите максимальный из всех средних рейтов по возрастам.*/
 let maxAverageRate = 0;
-    for (key in averageRate) {
-        maxAverageRate = Math.max(maxAverageRate, averageRate[key])
+for (key in averageRate) {
+    maxAverageRate = Math.max(maxAverageRate, averageRate[key])
 }
 
 console.log(maxAverageRate)
@@ -72,7 +72,7 @@ console.log(maxAverageRate)
 
 let maxAverageRate = 0;
 for (let key in averageRate) {
- maxAverageRate > averageRate[key]? maxAverageRate : maxAverageRate = averageRate[key];
+    maxAverageRate > averageRate[key]? maxAverageRate : maxAverageRate = averageRate[key];
 }
 
 console.log(maxAverageRate)
